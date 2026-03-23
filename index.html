@@ -2,213 +2,515 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alchemy: Vision Venture Victory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alchemy: Turn Untapped Capital into War-Winning Power</title>
     <style>
+        html, body, .sidebar, .container, .content, section, .lead-capture, footer {
+            background-color: #000;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
             color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
-        header {
-            background-color: #1a1a1a;
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
             color: #ffd700;
-            text-align: center;
-            padding: 50px 20px;
         }
-        header h1 {
+        .sidebar img {
+            width: 60px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
             margin: 0;
-            font-size: 3em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        .logo {
-            max-width: 200px;
-            margin-bottom: 20px;
+        .sidebar a {
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 1em;
+            padding: 5px 10px;
+            word-break: break-word;
         }
-        section {
-            padding: 40px 20px;
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #333;
+        }
+        .container {
+            margin-top: 80px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+        .hero, section, .lead-capture {
+            padding: 40px 0;
+            border: 1px solid #000;
+            border-left: 0;
+            border-right: 0;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background-size: cover;
+            background-position: center;
+        }
+        .hero, #problem, #guide, #cta, #success, #plan {
+            color: #fff;
+            background-color: #000;
+        }
+        #faq, #timeline {
+            background-color: #000;
+        }
+        .hero { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/hero.JPG'); }
+        #problem { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/problem.JPG'); }
+        #guide { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/guide.JPG'); }
+        #cta { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/cta.jpg'); }
+        #success { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/success.JPG'); }
+        #faq { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/faq.jpg'); }
+        #plan { background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/plan.jpg'); }
+
+        /* TIMELINE – HORIZONTAL ON DESKTOP */
+        #timeline {
+            width: 100%;
+            padding: 60px 20px;
+            background-image: url('https://patrickhighland1-maker.github.io/Alchemy.github.io/time.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        .timeline-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
             max-width: 1200px;
             margin: 0 auto;
         }
-        #about {
-            background-color: #fff;
+        .timeline-item {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .6s ease, transform .6s ease;
         }
-        #team {
-            background-color: #eee;
-        }
-        #plan {
-            background-color: #fff;
-        }
-        #stakeholders {
-            background-color: #eee;
-        }
-        #contact {
-            background-color: #1a1a1a;
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+        .timeline-content {
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
             color: #fff;
-            text-align: center;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        h2 {
-            color: #1a1a1a;
-            border-bottom: 2px solid #ffd700;
-            padding-bottom: 10px;
+        .timeline-content p {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-size: 1.1em;
+            margin: 0;
         }
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
+        .timeline-content:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255,215,0,0.3); }
+        #timeline h2 { text-align: center; margin-bottom: 40px; color: #fff; }
+
+        /* PLAN SECTION – ALWAYS 3 COLUMNS, FULL TEXT */
+        .plan-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .plan-step {
+            background: rgba(255,215,0,0.1);
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+        .plan-step:hover {
+            background: rgba(255,215,0,0.2);
+            box-shadow: 0 0 15px rgba(255,215,0,0.3);
         }
-        th {
-            background-color: #ffd700;
-            color: #1a1a1a;
+        .plan-step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #fff;
         }
-        footer {
-            background-color: #1a1a1a;
+        .plan-step-icon {
+            font-size: 1.4em;
+            transition: transform 0.3s ease;
             color: #ffd700;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        }
+        .plan-step-icon.rotated {
+            transform: rotate(180deg);
+        }
+        .plan-step-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+            margin-top: 10px;
+        }
+        .plan-step-content.expanded {
+            max-height: 500px;
+            overflow: visible;
+        }
+        .plan-step-content p {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-size: 1.1em;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h2, p, a, .faq-question, .faq-answer, .faq-expand {
+            position: relative;
+            z-index: 5;
+            pointer-events: auto;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            word-break: break-word;
+        }
+        #problem h2, #problem p { text-shadow: 3px 3px 6px rgba(0,0,0,0.8); }
+        #problem h2, #guide h2, #cta h2, #success h2, #faq h2, #plan h2, #timeline h2 { font-size: 1.8em; }
+        #problem p, #guide p, #cta p, #success p, .cta-button, #cta a, #success a, #plan p,
+        #faq .faq-question, #faq .faq-answer, #faq .faq-expand { font-size: 1.2em; }
+        a { color: #ffd700; }
+        .cta-button {
+            background-color: #ffd700;
+            color: #000;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: all .3s ease;
+        }
+        .cta-button:hover { background: #ffed4e; }
+        #faq h2, #faq .faq-question, #faq .faq-answer, #faq .faq-expand, #timeline h2 { color: #000; }
+        #faq .faq-answer { display: none; }
+        #faq .faq-answer.active { display: block; }
+        #faq .faq-expand { margin-left: 10px; cursor: pointer; }
+        .faq-item { margin-bottom: 20px; }
+        footer { padding: 20px 0; color: #ffd700; font-size: 0.9em; text-align: center; }
+        footer p.disclaimer { margin-top: 10px; }
+
+        @media (max-width: 768px) {
+            .sidebar img { width: 50px; margin-right: 8px; }
+            .sidebar ul { gap: 8px; }
+            .sidebar a { font-size: .9em; padding: 5px 8px; }
+            .container { margin-top: 60px; }
+            section, .lead-capture { padding: 40px 0; }
+            .plan-section { grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 15px; }
+            .plan-step { padding: 15px; }
+            .plan-step-header { font-size: 1.2em; }
+            .timeline-container { flex-direction: column; padding: 15px; }
+            .timeline-item { max-width: 100%; }
+        }
+        @media (max-width: 480px) {
+            .sidebar img { width: 40px; margin-right: 5px; margin-bottom: 5px; }
+            .sidebar ul { gap: 5px; }
+            .sidebar a { font-size: .8em; padding: 5px; }
+            .container { margin-top: 60px; }
+            .hero, section, .lead-capture { padding: 30px 0; }
+            #timeline h2 { font-size: 1.6em; }
+            .timeline-content p { font-size: 1em; }
+            .plan-section { gap: 10px; }
+            .plan-step-header { font-size: 1.1em; }
+            .plan-step-content p { font-size: 1em; }
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const faqQuestions = document.querySelectorAll(".faq-item .faq-question");
+            const sidebarLinks = document.querySelectorAll(".sidebar a");
+            const timelineItems = document.querySelectorAll(".timeline-item");
+            const planSteps = document.querySelectorAll(".plan-step");
+
+            function setActiveLink() {
+                const scrollPos = window.scrollY + 100;
+                sidebarLinks.forEach(l => {
+                    const sec = document.getElementById(l.getAttribute("href").slice(1));
+                    if (sec) {
+                        const top = sec.offsetTop - 150;
+                        const bot = top + sec.offsetHeight;
+                        l.classList.toggle("active", scrollPos >= top && scrollPos < bot);
+                    }
+                });
+            }
+            window.addEventListener("scroll", setActiveLink);
+            setActiveLink();
+
+            faqQuestions.forEach(q => {
+                const btn = q.querySelector(".faq-expand");
+                const ans = q.nextElementSibling;
+                if (btn && ans) {
+                    q.addEventListener("click", () => {
+                        const active = ans.classList.toggle("active");
+                        btn.textContent = active ? "−" : "+";
+                        ans.style.display = active ? "block" : "none";
+                    });
+                }
+            });
+
+            const observer = new IntersectionObserver(e => e.forEach(en => en.isIntersecting && en.target.classList.add("visible")), { threshold: .1 });
+            timelineItems.forEach(i => observer.observe(i));
+
+            planSteps.forEach(step => {
+                const header = step.querySelector('.plan-step-header');
+                const content = step.querySelector('.plan-step-content');
+                const icon = step.querySelector('.plan-step-icon');
+
+                const toggle = () => {
+                    const isExpanded = content.classList.contains('expanded');
+                    planSteps.forEach(s => {
+                        if (s !== step) {
+                            s.querySelector('.plan-step-content').classList.remove('expanded');
+                            s.querySelector('.plan-step-icon').classList.remove('rotated');
+                        }
+                    });
+                    content.classList.toggle('expanded', !isExpanded);
+                    icon.classList.toggle('rotated', !isExpanded);
+                };
+
+                step.addEventListener('click', toggle);
+                header.setAttribute('tabindex', '0');
+                header.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggle();
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-    <header>
-        <img src="logo.png" alt="Alchemy Logo" class="logo">
-        <!-- Note: In a real website, replace the src with the actual logo URL or base64 encoded image. The provided logo is a hooded figure holding a glowing crystal. -->
-        <h1>Alchemy</h1>
-        <p>Vision Venture Victory</p>
-    </header>
-
-    <section id="about">
-        <h2>About Alchemy</h2>
-        <p>Alchemy is a dynamic engine that fuses intelligence, investment, and integration to convert $311B per year of uninvested venture capital into capabilities that win wars. It empowers leaders across defense, startups, and Congress to overcome acquisition challenges and reclaim America’s innovative edge against adversaries like the PRC.</p>
-    </section>
-
-    <section id="team">
-        <h2>Meet the Alchemists</h2>
-        <p>Your partners in innovation:</p>
+    <div class="sidebar">
+        <img src="https://patrickhighland1-maker.github.io/Alchemy.github.io/logo.jpg" alt="Alchemy Logo" loading="lazy">
         <ul>
-            <li>Maj Matthew "Matt" Anderson, Special Operations Pilot bridging battle to breakthroughs</li>
-            <li>Lt Col Patrick "Dice" Highland, PhD, Experimental Test Pilot engineering prototypes under intense pressure</li>
-            <li>Maj Eric "Slick" Kenney, Offensive Cyberspace Operations Officer humbled by China's speed, now forging defenses to reclaim it</li>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#plan">Plan</a></li>
+            <li><a href="#cta">Contact</a></li>
+            <li><a href="#success">Success</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#guide">About Us</a></li>
+            <li><a href="#faq">FAQ</a></li>
         </ul>
-        <p>We want to learn from you, shadowing your operations to understand concerns, and then use those lessons to create Alchemy: A Transformative Innovation Engine turning $311B uninvested VC into war-winning gold.</p>
-    </section>
+    </div>
 
-    <section id="plan">
-        <h2>Our Plan: Intelligence, Investment, and Integration</h2>
-        <ul>
-            <li><strong>Intelligence</strong> fuses reports, open data, doctrine, and analysis to spot U.S. gaps—like mobility boosts or defense hardening.</li>
-            <li><strong>Investment</strong> publishes insights in a DoD-funded marketplace (e.g., $500K prototypes); startups innovate, VC amplifies. Outputs: Proven gear countering adversary weaknesses.</li>
-            <li><strong>Integration</strong> aligns with Planning, Programming, Budgeting, and Execution cycles (e.g., Pacific Deterrence Initiative for Indo-Pacific strength against PRC)—ensuring smooth adoption.</li>
-        </ul>
-        <p>Let’s prove it. Together we should start with a test case; run the Intelligence, Investment, and Integration process, iterate on issues we identify along the way, and engineer a competitive advantage beyond China's reach.</p>
-    </section>
+    <div class="container">
+        <div class="content">
 
-    <section id="stakeholders">
-        <h2>Stakeholders</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Intelligence</th>
-                    <th>Investment</th>
-                    <th>Integration</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>China Aerospace Studies Institute</td>
-                    <td>8VC</td>
-                    <td>Congress</td>
-                </tr>
-                <tr>
-                    <td>Taiwan Defense Group</td>
-                    <td>Shield Capital</td>
-                    <td>Chairman of the Joint Chiefs of Staff (CJCS)</td>
-                </tr>
-                <tr>
-                    <td>PACAF/A2</td>
-                    <td>Hermeus</td>
-                    <td>Deputy Secretary of War (Dep SecWar)</td>
-                </tr>
-                <tr>
-                    <td>J2</td>
-                    <td></td>
-                    <td>Deputy Secretary of the Air Force for Acquisitions (SAF/AQ)</td>
-                </tr>
-                <tr>
-                    <td>NASIC</td>
-                    <td></td>
-                    <td>Air Force Materiel Command (AFMC/CC)</td>
-                </tr>
-                <tr>
-                    <td>Checkmate</td>
-                    <td></td>
-                    <td>Air Force Life Cycle Management Center (AFMCLC/CC)</td>
-                </tr>
-                <tr>
-                    <td>Straegic Studies Group</td>
-                    <td></td>
-                    <td>Program Executive Officers (PEOs)</td>
-                </tr>
-                <tr>
-                    <td>System Program Offices (SPOs)</td>
-                    <td></td>
-                    <td>Senior Materiel Leaders (SMLs)</td>
-                </tr>
-                <tr>
-                    <td>DIU</td>
-                    <td></td>
-                    <td>Materiel Leaders (MLs)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>System Program Offices (SPOs)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Defense Innovation Unit (DIU)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>AFWERX</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Office of Strategic Capital (OSC)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Labs (AFRL, National, UARCs, FFRDCs, etc)</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+            <!-- HERO -->
+            <section class="hero">
+                <h2 style="font-size:3.5em;margin:0;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;">Alchemy</h2>
+                <p style="font-size:1.8em;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;word-break:break-word;">
+                    Close the gap between commercial innovation and government acquisition
+                </p>
+                <p style="font-size:1.2em;color:#fff;font-weight:bold;text-shadow:2px 2px 4px rgba(0,0,0,.7);position:relative;z-index:5;word-break:break-word;">
+                    Turn innovation potential into operational capability by aligning government, investors, and startups.
+                </p>
+                <a href="mailto:alchemy@wildbluehorizons.org?subject=Partner%20with%20Alchemy&body=I'm%20interested%20in%20partnering%20with%20Alchemy%20to%20support%20its%20mission.%20Please%20provide%20more%20details."
+                   class="cta-button">Partner with Us</a>
+            </section>
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>Email: alchemy@wildbluehorizons.org</p>
-        <p>Phone: (719) 201-5582</p>
-    </section>
+            <!-- PROBLEM -->
+            <section id="problem">
+                <h2>The Problem: Fragmented Playbooks</h2>
+                <p>Department of War Program Offices, venture capital investors, and startups operate in isolation despite a shared desire to deliver warfighting capability faster than adversaries. This creates a systemic innovation-to-capability gap.</p>
+            </section>
 
-    <footer>
-        &copy; 2025 Alchemy. All rights reserved.
-    </footer>
+            <!-- PLAN – VISION ABOVE BOXES -->
+            <section id="plan">
+                <h2>The Plan: A Three-Part Process</h2>
+                
+                <div style="max-width: 900px; margin: 0 auto 30px; padding: 20px; background: rgba(255,215,0,0.1); border: 1px solid #ffd700; border-radius: 8px; font-size: 1.1em; line-height: 1.7; color: #fff;">
+                    Alchemy envisions a system where the Department of War can see and shape emerging technology trends, where investors can identify the technologies most likely to transition, and where startups can find clear pathways to contribute to the mission. The long-term vision is a connected, data-driven marketplace where insight informs investment, investment drives innovation, and innovation reliably transitions into capability.
+                </div>
+
+                <div class="plan-section">
+                    <div class="plan-step" tabindex="0">
+                        <div class="plan-step-header">
+                            <span>Insight</span>
+                            <span class="plan-step-icon">↓</span>
+                        </div>
+                        <div class="plan-step-content">
+                            <p>Create a data-driven common operating picture of technology areas that matter to both government and industry. Provide decision-makers with clear visibility into where defense demand meets commercial opportunity.</p>
+                        </div>
+                    </div>
+                    <div class="plan-step" tabindex="0">
+                        <div class="plan-step-header">
+                            <span>Investment</span>
+                            <span class="plan-step-icon">↓</span>
+                        </div>
+                        <div class="plan-step-content">
+                            <p>Incentivize performance by combining government demand signals and venture capital to accelerate promising technologies. Develop milestone-based models that reward measurable progress and signal private investment confidence.</p>
+                        </div>
+                    </div>
+                    <div class="plan-step" tabindex="0">
+                        <div class="plan-step-header">
+                            <span>Integration</span>
+                            <span class="plan-step-icon">↓</span>
+                        </div>
+                        <div class="plan-step-content">
+                            <p>Engage acquisition pathways from the start to ensure that successful prototypes can scale to programs of record. Reduce perceived risk by quantifying market strength and technology maturity.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA / PLATFORM ACCESS + BI-WEEKLY DEMO -->
+            <section id="cta" class="lead-capture">
+                <h2>Get the Alchemy Blueprint: Vision Venture Victory</h2>
+                <p>Discover how to convert untapped capital into war-winning solutions.</p>
+
+                <div style="margin: 40px 0; text-align: center;">
+                    <a href="https://youtu.be/29Ds2sV8-Yk" target="_blank" class="cta-button" style="margin: 0 15px 20px; display: inline-block; padding: 16px 32px; font-size: 1.2em;">
+                        Watch the Platform Demo
+                    </a>
+                    <a href="platform.html" target="_blank" class="cta-button" style="margin: 0 15px 20px; display: inline-block; padding: 16px 32px; font-size: 1.2em; background: #000; color: #ffd700; border: 2px solid #ffd700;">
+                        Try the Platform Yourself
+                    </a>
+                </div>
+
+                <!-- BI-WEEKLY DEMO CALLOUT -->
+                <div style="max-width: 700px; margin: 40px auto; padding: 25px; background: rgba(255,215,0,0.1); border: 2px solid #ffd700; border-radius: 12px; text-align: center; color: #fff;">
+                    <h3 style="color: #ffd700; margin-bottom: 15px; font-size: 1.4em;">Alchemy Bi-Weekly Demo</h3>
+                    <p style="font-size: 1.1em; margin: 10px 0;">
+                        <strong>Wednesday, March 25 · 14:00 – 15:00</strong><br>
+                        Time zone: America/Chicago
+                    </p>
+                    <p style="font-size: 1.1em; margin: 20px 0 10px;">
+                        <strong>Google Meet joining info</strong><br>
+                        Video call link: <a href="https://meet.google.com/qyo-yewu-jqg" target="_blank" style="color: #ffd700; text-decoration: underline;">https://meet.google.com/qyo-yewu-jqg</a><br>
+                        Or dial: <strong>(US) +1 925-587-6871</strong> PIN: <strong>987 681 471</strong>#
+                    </p>
+                    <p style="font-size: 0.95em; opacity: 0.9; margin-top: 15px;">
+                        More phone numbers: <a href="https://tel.meet/qyo-yewu-jqg?pin=4352520311538" target="_blank" style="color: #ffd700; text-decoration: underline;">https://tel.meet/qyo-yewu-jqg?pin=4352520311538</a>
+                    </p>
+                </div>
+
+                <p style="font-size: 1em; opacity: 0.9; margin-top: 30px;">
+                    <strong>Want the full Blueprint?</strong> Email us at 
+                    <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20Alchemy%20Blueprint">
+                        alchemy@wildbluehorizons.org
+                    </a>
+                </p>
+            </section>
+
+            <!-- SUCCESS -->
+            <section id="success">
+                <h2>War-Winning Capabilities Delivered</h2>
+                <p style="font-size: 1.2em; line-height: 1.8; max-width: 900px; margin: 0 auto;">
+                    By connecting data, incentives, and communities across the public and private sectors, Alchemy seeks to turn fragmented innovation into a repeatable national advantage. The end goal is not one successful project—it’s a system that makes success routine.
+                </p>
+
+                <a href="mailto:alchemy@wildbluehorizons.org?subject=Take%20Action%20with%20Alchemy&body=I'm%20ready%20to%20take%20action%20with%20Alchemy.%20Please%20provide%20next%20steps%20for%20collaboration."
+                   class="cta-button" style="margin-top: 40px;">Take Action Now</a>
+            </section>
+
+            <!-- TIMELINE -->
+            <section id="timeline">
+                <h2>Timeline</h2>
+                <div class="timeline-container">
+                    <div class="timeline-item"><div class="timeline-content"><p>Sep 25 – Alchemy approved as Blue Horizons project</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Dec 25 – Create marketplace and select test projects</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Jan 26 – Startups begin work on prototypes</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>Feb 26 – Venture capital investment and senior leader engagements</p></div></div>
+                    <div class="timeline-item"><div class="timeline-content"><p>May 26 – Brief Air Force Chief of Staff on prototype outcomes</p></div></div>
+                </div>
+            </section>
+
+            <!-- ABOUT US -->
+            <section id="guide">
+                <h2>The Alchemists</h2>
+                <p>
+                    We are 
+                    <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/highland_bio.pdf" download>Lt Col Patrick "Dice" Highland, PhD</a> 
+                    (<a href="http://linkedin.com/in/patrick-highland" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>) 
+                    (<a href="https://blinq.me/vU4KNfnHnkeWXxM9cu3j" target="_blank" style="color:#ffd700; text-decoration:none;">Blinq</a>), 
+                    <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/anderson_bio.pdf" download>Maj Matt Anderson</a> 
+                    (<a href="https://www.linkedin.com/in/matthewanderson48" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>) 
+                    (<a href="https://blinq.me/XDrMeQQHCp4ig0p2Ggua" target="_blank" style="color:#ffd700; text-decoration:none;">Blinq</a>), and 
+                    <a href="https://patrickhighland1-maker.github.io/Alchemy.github.io/kenney_bio.pdf" download>Maj Eric "Slick" Kenney</a> 
+                    (<a href="https://www.linkedin.com/in/eric-kenney-79805378/" target="_blank" style="color:#ffd700; text-decoration:none;">LinkedIn</a>) 
+                    (<a href="https://blinq.me/J8pQvdubyQeo" target="_blank" style="color:#ffd700; text-decoration:none;">Blinq</a>) 
+                    from the Chief of Staff of the Air Force’s Blue Horizons fellowship program – a strategic innovation think-and-do tank charged with developing solutions to the Air Force’s most pressing challenges. Experienced strategists, we’re here to shadow your operations and turn challenges into victories.
+                </p>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">How does Alchemy benefit stakeholders?<span class="faq-expand">+</span></div>
+                    <div class="faq-answer">Stakeholders gain faster acquisition processes, innovative prototypes, and aligned strategies, empowering warfighters and strengthening national security through collaboration.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Who can participate in Alchemy?<span class="faq-expand">+</span></div>
+                    <div class="faq-answer">Everyone!</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the Blueprint about?<span class="faq-expand">+</span></div>
+                    <div class="faq-answer">The Alchemy Blueprint outlines our strategy to convert untapped capital into actionable capabilities, including case studies and stakeholder roles. <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.">Request the Blueprint</a> to learn more.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How can I get involved?<span class="faq-expand">+</span></div>
+                    <div class="faq-answer">Contact us via email at alchemy@wildbluehorizons.org or <a href="mailto:alchemy@wildbluehorizons.org?subject=Request%20the%20Blueprint&body=Please%20send%20me%20the%20Alchemy%20Blueprint%20to%20learn%20more%20about%20your%20strategy.">request the Blueprint</a> to discuss collaboration opportunities.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">My organization already does something like this... how is Alchemy different?<span class="faq-expand">+</span></div>
+                    <div class="faq-answer">Alchemy stands out by integrating a whole-of-society approach, combining all-source intelligence, venture capital, and government resources into a unified strategy, offering a scalable model tailored to national defense needs unlike traditional isolated efforts.</div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer>
+                <p>© 2025 Alchemy. Vision Venture Victory. <a href="mailto:alchemy@wildbluehorizons.org?subject=Contact%20Alchemy&body=I'm%20reaching%20out%20to%20learn%20more%20about%20Alchemy.%20Please%20provide%20additional%20information.">Contact Us</a></p>
+                <p class="disclaimer">The views and opinions expressed on this website are those of the authors and do not necessarily reflect the official policy or position of the United States Air Force, the Department of Defense, or the U.S. Government.</p>
+            </footer>
+
+        </div>
+    </div>
 </body>
 </html>
